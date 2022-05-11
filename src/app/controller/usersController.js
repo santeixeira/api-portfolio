@@ -1,16 +1,15 @@
-import { products } from "../models/index.js";
+import { Users } from "../models/index.js";
 
-export default class productsController {
+export default class UsersController {
   static index = (req, res) => {
-    products
-      .find((err, products) => {
-        res.status(200).json(products);
-      })
-      .sort({ description: -1 });
+    Users
+      .find().populate('nome').exec((err, Users) => {
+        res.status(200).json(Users);
+      });
   };
 
   static store = (req, res) => {
-    const data = new products(req.body);
+    const data = new Users(req.body);
 
     data.save((err) => {
       if (err) {
@@ -25,20 +24,20 @@ export default class productsController {
 
   static show = (req, res) => {
     const id = req.params.id;
-    products.findById(id, (err, products) => {
+    Users.findById(id, (err, Users) => {
       if (err) {
         res.status(404).send({
           msg: `${err.message} - Produto nao encontrado com o id ${id}`,
         });
       } else {
-        res.status(200).send(products);
+        res.status(200).send(Users);
       }
     });
   };
 
   static update = (req, res) => {
     const id = req.params.id;
-    products.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+    Users.findByIdAndUpdate(id, { $set: req.body }, (err) => {
       if (err) {
         res
           .status(500)
@@ -51,7 +50,7 @@ export default class productsController {
 
   static destroy = (req, res) => {
     const id = req.params.id;
-    products.findByIdAndDelete(id, (err) => {
+    Users.findByIdAndDelete(id, (err) => {
       if (err) {
         res
           .status(500)
