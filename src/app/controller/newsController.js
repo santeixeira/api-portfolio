@@ -2,8 +2,8 @@ import { News } from "../models/index.js";
 
 export default class NewsController {
   static index = (req, res) => {
-    News.find((err, Task) => {
-      res.status(200).json(Task);
+    News.find((err, News) => {
+      res.status(200).json(News);
     }).sort({ id: -1 });
   };
 
@@ -22,14 +22,14 @@ export default class NewsController {
   };
 
   static show = (req, res) => {
-    const id = req.params.id;
-    News.findById(id, (err, products) => {
+    const data = req.params.title
+    News.find({title: {$regex: data, $options: 'i'}}, (err, news) => {
       if (err) {
         res.status(404).send({
           msg: `${err.message} - Noticia nao encontrado com o id ${id}`,
         });
       } else {
-        res.status(200).send(products);
+        res.status(200).send(news);
       }
     });
   };

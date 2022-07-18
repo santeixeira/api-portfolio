@@ -9,11 +9,10 @@ const pomEnum = [
 
 const taskSchema = new mongoose.Schema(
   {
-    id: { type: String },
-    timeSeconds: { type: Number, required: true },
-    description: { type: String, required: true },
-    typePomodoro: { type: String, enum: pomEnum, required: true},
-    project: { type: Object, required: true},
+    timeSeconds: { type: Number, required: true, unique: false },
+    description: { type: String, required: true, unique: false},
+    typePomodoro: { type: String, enum: pomEnum, required: true, unique: false},
+    project: { type: Object, required: true, unique: false},
     createdAt: { type: Date, required: true, default: Date() },
   },
   {

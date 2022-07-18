@@ -1,5 +1,4 @@
 import { Task } from "../models/index.js";
-import {id} from "../utils/index.js"
 
 export default class TaskController {
   static index = (req, res) => {
@@ -7,7 +6,7 @@ export default class TaskController {
       .find((err, Task) => {
         res.status(200).json(Task);
       })
-      .sort({ id: -1 });
+      .sort({ createdAt: -1 });
   };
 
   static store = (req, res) => {
@@ -16,10 +15,10 @@ export default class TaskController {
     data.save((err) => {
       if (err) {
         res.status(500).send({
-          msg: `${err.message} - Falha na requisicao "catalogar produto".`,
+          msg: `${err.message} - Falha na requisicao "Adicionar tarefa".`,
         });
       } else {
-        res.status(201).send({...data.id = id}.toJSON());
+        res.status(201).send(data.toJSON());
       }
     });
   };
@@ -29,7 +28,7 @@ export default class TaskController {
     Task.findById(id, (err, Task) => {
       if (err) {
         res.status(404).send({
-          msg: `${err.message} - Produto nao encontrado com o id ${id}`,
+          msg: `${err.message} - Could not find a task with id: ${id}`,
         });
       } else {
         res.status(200).send(Task);
@@ -43,7 +42,7 @@ export default class TaskController {
       if (err) {
         res
           .status(500)
-          .send(`${err.message} - Produto nao encontrado com o id ${id}`);
+          .send(`${err.message} - Task not found with id: ${id}`);
       } else {
         res.status(200).send({ msg: "Produto foi alterado com sucesso" });
       }
@@ -56,7 +55,7 @@ export default class TaskController {
       if (err) {
         res
           .status(500)
-          .send({ msg: `${err.message} nao foi possivel deletar o produto.` });
+          .send({ msg: `${err.message} Was not able to delete task.` });
       } else {
         res.status(200).send({ msg: "produto excluido com sucesso." });
       }

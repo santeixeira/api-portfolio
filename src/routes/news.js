@@ -5,7 +5,7 @@ const routes = Router();
 
 const news = routes
   .get("/noticias", NewsController.index)
-  .get("/noticias/:id", NewsController.show)
+  .get("/noticias/:title", NewsController.show)
   .post("/noticias", NewsController.store)
   .put("/noticias/:id", NewsController.update)
   .delete("/noticias/:id", NewsController.destroy)
