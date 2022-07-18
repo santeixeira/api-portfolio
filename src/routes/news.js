@@ -8,6 +8,6 @@ const news = routes
   .get("/noticias/:id", NewsController.show)
   .post("/noticias", NewsController.store)
   .put("/noticias/:id", NewsController.update)
-  .delete("noticias/:id", NewsController.destroy)
+  .delete("/noticias/:id", NewsController.destroy)
 
 export default news;

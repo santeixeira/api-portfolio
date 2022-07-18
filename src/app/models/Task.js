@@ -12,7 +12,7 @@ const taskSchema = new mongoose.Schema(
     id: { type: String },
     timeSeconds: { type: Number, required: true },
     description: { type: String, required: true },
-    typePomodoro: { type: String, enum: pomEnum },
+    typePomodoro: { type: String, enum: pomEnum, required: true},
     project: { type: Object, required: true},
     createdAt: { type: Date, required: true, default: Date() },
   },

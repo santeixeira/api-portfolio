@@ -2,14 +2,9 @@ import { News } from "../models/index.js";
 
 export default class NewsController {
   static index = (req, res) => {
-    News
-      .find((err, news) => {
-        res.status(500).send({
-          msg: `${err.message} - Nao foi possivel encontrar nenhuma.`,
-        });
-        res.status(200).json(news);
-      })
-      .sort({ createdAt: -1 });
+    News.find((err, Task) => {
+      res.status(200).json(Task);
+    }).sort({ id: -1 });
   };
 
   static store = (req, res) => {

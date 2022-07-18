@@ -11,8 +11,9 @@ const users = routes
   .delete("users/:id", UsersController.destroy)
 
   .get("/tarefas", TaskController.index)
-  .get("/:description", TaskController.show)
+  .get("/tarefas/:id", TaskController.show)
   .post("/tarefas", TaskController.store)
-  .put("/:description", TaskController.update)
+  .put("/tarefas/:id", TaskController.update)
+  .delete("/tarefas/:id", TaskController.destroy)
 
 export default users;
