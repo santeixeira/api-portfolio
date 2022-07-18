@@ -1,5 +1,5 @@
 import { Router } from "express";
-import { UsersController, InfosController } from "../controller/index.js";
+import { UsersController, TaskController } from "../app/controller/index.js";
 
 const routes = Router();
 
@@ -10,10 +10,9 @@ const users = routes
   .put("/users/:id", UsersController.update)
   .delete("users/:id", UsersController.destroy)
 
-
-  .get("/credentials", InfosController.index)
-  .get("/:username", InfosController.show)
-  .post("/credentials", InfosController.store)
-  .put("/:username", InfosController.update)
+  .get("/tarefas", TaskController.index)
+  .get("/:description", TaskController.show)
+  .post("/tarefas", TaskController.store)
+  .put("/:description", TaskController.update)
 
 export default users;

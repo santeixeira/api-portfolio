@@ -1,2 +1,2 @@
-# ecommerce-plantas
-Projeto limpo usando express + mongoDB onde será realizado uma comparacao de deploy com o adonis.js!
+# API para backend do portfolio
+Projetinho criado para o backend do meu site, onde tratarei as informações dele de forma dinâmica.

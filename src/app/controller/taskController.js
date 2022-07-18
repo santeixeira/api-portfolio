@@ -1,16 +1,17 @@
-import { products } from "../models/index.js";
+import { Task } from "../models/index.js";
+import {id} from "../utils/index.js"
 
-export default class productsController {
+export default class TaskController {
   static index = (req, res) => {
-    products
-      .find((err, products) => {
-        res.status(200).json(products);
+    Task
+      .find((err, Task) => {
+        res.status(200).json(Task);
       })
-      .sort({ description: -1 });
+      .sort({ id: -1 });
   };
 
   static store = (req, res) => {
-    const data = new products(req.body);
+    const data = new Task(req.body);
 
     data.save((err) => {
       if (err) {
@@ -18,27 +19,27 @@ export default class productsController {
           msg: `${err.message} - Falha na requisicao "catalogar produto".`,
         });
       } else {
-        res.status(201).send(data.toJSON());
+        res.status(201).send({...data.id = id}.toJSON());
       }
     });
   };
 
   static show = (req, res) => {
     const id = req.params.id;
-    products.findById(id, (err, products) => {
+    Task.findById(id, (err, Task) => {
       if (err) {
         res.status(404).send({
           msg: `${err.message} - Produto nao encontrado com o id ${id}`,
         });
       } else {
-        res.status(200).send(products);
+        res.status(200).send(Task);
       }
     });
   };
 
   static update = (req, res) => {
     const id = req.params.id;
-    products.findByIdAndUpdate(id, { $set: req.body }, (err) => {
+    Task.findByIdAndUpdate(id, { $set: req.body }, (err) => {
       if (err) {
         res
           .status(500)
@@ -51,7 +52,7 @@ export default class productsController {
 
   static destroy = (req, res) => {
     const id = req.params.id;
-    products.findByIdAndDelete(id, (err) => {
+    Task.findByIdAndDelete(id, (err) => {
       if (err) {
         res
           .status(500)

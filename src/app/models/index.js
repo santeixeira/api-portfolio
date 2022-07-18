@@ -1,3 +1,3 @@
 export { Users } from "./User.js"
-export { products } from "./Product.js"
-export { Infos } from "./Info.js"
+export { Task } from "./Task.js"
+export { News } from "./News.js"
